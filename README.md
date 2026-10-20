@@ -48,10 +48,7 @@ musyrif/
 │       ├── logo-stit-al-wafi.png     # Logo resmi STIT Al Wafi (dari alwafi.ac.id)
 │       ├── flyer-musyrif.webp        # Flyer utama (tampilan penuh / lightbox)
 │       ├── flyer-musyrif-640.webp    # Flyer versi kecil (srcset layar kecil)
-│       ├── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
-│       ├── foto-pembicara-placeholder.jpg  # Foto representatif (PLACEHOLDER)
-│       ├── qr-pendaftaran.png        # Placeholder QR pendaftaran
-│       └── qr-informasi.png          # Placeholder QR informasi
+│       └── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
 ├── scripts/
 │   ├── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
 │   └── test-api.mjs                  # Uji lokal endpoint serverless
@@ -66,15 +63,26 @@ musyrif/
     └── components/
         ├── Header/                   # Sticky navigation + menu mobile
         ├── HeroSection/              # Judul, tombol CTA, flyer + lightbox
-        ├── EventInfo/                # Informasi pelatihan + foto representatif
-        ├── PricingSection/           # Biaya pendaftaran + fasilitas
+        ├── FacilitiesSection/        # Fasilitas yang didapat peserta
         ├── BenefitsSection/          # Manfaat: Murabbi, Pembina, Pemimpin Santri
-        ├── RegistrationQR/           # Dua slot barcode + tombol daftar
         ├── ContactSection/           # Kontak panitia + tombol WhatsApp
         ├── FeedbackForm/             # Formulir saran & masukan
         ├── Footer/
         └── ui/                       # SmartImage, Lightbox, SectionHeading
 ```
+
+Urutan section di halaman (`src/App.jsx`):
+
+1. **Hero** (`#home`) — judul kegiatan, tanggal/waktu/tempat, tombol **PMB STIT**, flyer + lightbox
+2. **Fasilitas yang Didapat** (`#fasilitas`)
+3. **Manfaat Pelatihan** (`#manfaat`) — Murabbi, Pembina, Pemimpin Santri
+4. **Kontak Panitia** (`#kontak`)
+5. **Saran & Masukan** (`#saran-masukan`)
+6. **Footer**
+
+> Section "Informasi Pelatihan", "Biaya Pendaftaran", dan "Pendaftaran dan Informasi Pelatihan"
+> (dua barcode) dihapus atas permintaan pemilik halaman. Bila ingin dikembalikan, komponennya
+> masih tersedia pada riwayat Git (commit `0b3d142`).
 
 ---
 
@@ -115,7 +123,7 @@ Bagian yang sering diperbarui:
 | ------------------------ | ------------------------------------ |
 | Tanggal, waktu, tempat   | `event`                              |
 | Alamat lengkap           | `event.address`                      |
-| Biaya (harga coret, dll) | `pricing`                            |
+| Biaya (harga coret, dll) | `pricing` (data cadangan, belum ditampilkan di halaman) |
 | Fasilitas                | `facilities`                         |
 | Manfaat pelatihan        | `benefits`                           |
 | Nama & nomor kontak      | `contact`                            |
@@ -167,40 +175,27 @@ Flyer ditampilkan dengan `object-fit: contain` sehingga tidak pernah terpotong, 
 diperbesar lewat lightbox (klik gambar atau tombol "Klik untuk memperbesar", tutup dengan
 tombol X atau Esc).
 
-### 5.2 Foto representatif (pembicara / musyrif / peserta)
-
-Saat ini `public/images/foto-pembicara-placeholder.jpg` adalah **placeholder buatan**
-(siluet netral di atas latar navy) — bukan foto orang sungguhan.
-
-Untuk menggantinya:
-
-1. Letakkan foto baru di `public/images/` dengan nama yang sama, **atau** beri nama baru lalu
-   ubah `images.speakerPhoto.src` di `siteConfig.js`.
-2. Rasio yang nyaman: potret 4:5 (mis. 1200×1500 px).
-3. Tata letak tidak berubah karena ukuran ditetapkan lewat CSS `aspect-ratio`, bukan dari gambar.
-
-### 5.3 Dua barcode (QR)
-
-Kedua QR masih **placeholder** dan sengaja **bukan** QR acak yang terlihat seperti QR aktif —
-teksnya tertulis jelas "QR belum tersedia". QR yang ada di dalam brosur juga tidak dianggap
-sebagai pengganti kedua slot ini.
-
-Untuk memasang QR asli:
-
-1. Ganti `public/images/qr-pendaftaran.png` dan `public/images/qr-informasi.png` dengan gambar
-   QR asli (disarankan PNG/SVG minimal 600×600 px, latar putih, tanpa blur).
-2. Bila nama file berbeda, ubah `images.qrRegistration.src` dan `images.qrInformation.src`.
-
-Kartu QR memakai latar putih, bingkai, dan ruang kosong yang cukup sehingga QR baru tetap
-terbaca. Di desktop tampil berdampingan; di layar < 560 px disusun vertikal agar ukuran
-pemindaian tetap nyaman.
-
-### 5.4 Logo
+### 5.2 Logo
 
 `public/images/logo-stit-al-wafi.png` adalah **logo resmi** yang diambil dari
 `https://alwafi.ac.id/assets/img/stit.png` (230×84 px, PNG transparan berwarna emas).
 Karena warna emas transparan, logo dipasang di header dan footer yang berlatar navy agar
 kontrasnya baik. Logo tidak diregangkan, dipotong, atau diwarnai ulang.
+
+### 5.3 Aset section yang sudah dihapus (cadangan)
+
+Section "Informasi Pelatihan", "Biaya Pendaftaran", dan "Pendaftaran & Barcode" sudah dihapus
+dari halaman, sehingga berkas berikut ikut dihapus karena tidak lagi dipakai:
+
+- `public/images/foto-pembicara-placeholder.jpg`
+- `public/images/qr-pendaftaran.png`, `public/images/qr-informasi.png`
+
+Bila suatu saat ingin mengembalikannya:
+
+```bash
+git checkout 0b3d142 -- src/components/EventInfo src/components/RegistrationQR src/components/PricingSection
+python3 scripts/optimize-assets.py     # memunculkan kembali foto & QR placeholder
+```
 
 ---
 
@@ -290,10 +285,8 @@ git push -u origin main
 
 ## 9. Hal yang masih menunggu dari pihak sekolah / panitia
 
-1. **QR code asli** pendaftaran dan informasi → ganti dua berkas placeholder di `public/images/`.
-2. **Foto pembicara/musyrif/peserta** → ganti `public/images/foto-pembicara-placeholder.jpg`.
-3. **Endpoint penyimpanan form** (opsional) → isi `FEEDBACK_WEBHOOK_URL`.
-4. **Konfirmasi data brosur** (tanggal, biaya) — data saat ini mengikuti brosur yang diberikan
-   dan dapat berubah sewaktu-waktu.
+1. **Endpoint penyimpanan form** (opsional) → isi `FEEDBACK_WEBHOOK_URL`.
+2. **Konfirmasi data brosur** (tanggal, waktu, tempat) — data saat ini mengikuti brosur yang
+   diberikan dan dapat berubah sewaktu-waktu.
 
 Sudah terpenuhi: URL pendaftaran (PMB) resmi → `https://siakad.alwafi.ac.id/register`.

@@ -58,17 +58,11 @@ export default function HeroSection() {
             >
               {siteConfig.cta.label}
             </a>
-            <a className="btn btn--ghost-light" href="#informasi">
+            <a className="btn btn--ghost-light" href="#manfaat">
               <ArrowDown size={18} aria-hidden="true" />
               Lihat Detail
             </a>
           </div>
-
-          <p className="hero__note">
-            Biaya pendaftaran{' '}
-            <strong>{siteConfig.pricing.registrationFee}</strong> — kuota dan info terbaru
-            dikonfirmasi oleh panitia.
-          </p>
         </div>
 
         {/* Kolom kanan: flyer kegiatan */}

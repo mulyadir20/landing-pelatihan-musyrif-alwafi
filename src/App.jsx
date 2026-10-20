@@ -1,9 +1,7 @@
 import Header from './components/Header/Header';
 import HeroSection from './components/HeroSection/HeroSection';
-import EventInfo from './components/EventInfo/EventInfo';
-import PricingSection from './components/PricingSection/PricingSection';
+import FacilitiesSection from './components/FacilitiesSection/FacilitiesSection';
 import BenefitsSection from './components/BenefitsSection/BenefitsSection';
-import RegistrationQR from './components/RegistrationQR/RegistrationQR';
 import ContactSection from './components/ContactSection/ContactSection';
 import FeedbackForm from './components/FeedbackForm/FeedbackForm';
 import Footer from './components/Footer/Footer';
@@ -19,10 +17,8 @@ export default function App() {
 
       <main id="main-content">
         <HeroSection />
-        <EventInfo />
-        <PricingSection />
+        <FacilitiesSection />
         <BenefitsSection />
-        <RegistrationQR />
         <ContactSection />
         <FeedbackForm />
       </main>

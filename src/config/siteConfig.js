@@ -89,7 +89,9 @@ const siteConfig = {
     note: 'Informasi berdasarkan brosur resmi dan dapat diperbarui oleh panitia.',
   },
 
-  /** Biaya pendaftaran (sumber: brosur resmi) */
+  /** Biaya pendaftaran (sumber: brosur resmi).
+   *  Catatan: saat ini data ini belum ditampilkan di halaman — disimpan di sini
+   *  sebagai rujukan agar mudah ditampilkan kembali bila diperlukan. */
   pricing: {
     normalPrice: 'Rp375.000',
     registrationFee: 'Rp50.000',
@@ -149,21 +151,6 @@ const siteConfig = {
       // Rasio aspek flyer: 1440 x 2046 (≈ 0.70)
       width: 1440,
       height: 2046,
-    },
-    speakerPhoto: {
-      src: '/images/foto-pembicara-placeholder.jpg',
-      alt: 'Foto representatif kegiatan Pelatihan Musyrif Profesional',
-      width: 1200,
-      height: 1500,
-      isPlaceholder: true,
-    },
-    qrRegistration: {
-      src: '/images/qr-pendaftaran.png',
-      alt: 'QR code pendaftaran Pelatihan Musyrif Profesional',
-    },
-    qrInformation: {
-      src: '/images/qr-informasi.png',
-      alt: 'QR code informasi tambahan Pelatihan Musyrif Profesional',
     },
   },
 
