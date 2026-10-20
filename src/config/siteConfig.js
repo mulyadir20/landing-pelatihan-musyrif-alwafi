@@ -7,12 +7,8 @@
  * ============================================================================
  */
 
-/** GANTI dengan URL pendaftaran (PMB) resmi STIT Al Wafi.
- *  Contoh: "https://pmb.alwafi.ac.id/daftar"
- *  Selama masih KOSONG, semua tombol "Daftar Sekarang" dan menu PMB akan
- *  mengarahkan pengguna ke section Kontak (WhatsApp panitia) agar pengguna
- *  tetap punya jalur pendaftaran yang valid. */
-const PMB_URL = '';
+/** URL pendaftaran (PMB) resmi STIT Al Wafi. */
+const PMB_URL = 'https://siakad.alwafi.ac.id/register';
 
 const WHATSAPP_NUMBER = '6289527217662'; // format internasional, tanpa angka 0 di awal
 
@@ -57,11 +53,13 @@ const siteConfig = {
     'Pelatihan terapan bagi guru, pengasuh, dan pengelola pendidikan Islam untuk meningkatkan ' +
     'kualitas bimbingan, pembinaan, dan kepemimpinan di lingkungan pesantren serta sekolah.',
 
-  /** Menu navigasi. `href` berupa anchor internal atau URL eksternal. */
+  /** Menu navigasi. `href` berupa anchor internal atau URL eksternal.
+   *  Tulis 'pmb' untuk mengikuti konfigurasi PMB_URL di atas.
+   *  `badge` (opsional) menampilkan label kecil di samping menu. */
   navigation: [
     { label: 'Home', href: '#home' },
-    { label: 'PMB', href: 'pmb' }, // 'pmb' -> mengikuti konfigurasi PMB_URL di atas
-    { label: 'Kontak', href: '#kontak' },
+    { label: 'PMB', href: 'pmb' },
+    { label: 'Kontak', href: '#kontak', badge: 'via WA' },
     { label: 'Saran & Masukan', href: '#saran-masukan' },
   ],
 

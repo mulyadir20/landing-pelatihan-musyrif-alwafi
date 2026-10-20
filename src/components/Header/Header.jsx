@@ -30,7 +30,7 @@ function NavLinks({ onNavigate, variant = 'desktop' }) {
               }
             >
               {item.label}
-              {isPmb && !pmbUrl && <span className="nav__link-note">via WA</span>}
+              {item.badge && <span className="nav__link-note">{item.badge}</span>}
             </a>
           </li>
         );

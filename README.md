@@ -125,25 +125,23 @@ Bagian yang sering diperbarui:
 | Kategori form masukan    | `feedbackCategories`                 |
 | **URL PMB (pendaftaran)**| `PMB_URL` (paling atas pada berkas)  |
 
-### URL PMB (penting)
+### URL PMB (pendaftaran)
 
-Saat ini `PMB_URL` masih **KOSONG** karena URL pendaftaran resmi belum dikonfirmasi.
-Situs resmi alwafi.ac.id sendiri mencantumkan PMB melalui WhatsApp, sehingga tidak ada URL
-pendaftaran yang bisa dipastikan.
+Saat ini menu **PMB** dan seluruh tombol **Daftar Sekarang** mengarah ke URL pendaftaran resmi:
 
-Selama `PMB_URL` kosong:
-
-- Menu **PMB** dan semua tombol **Daftar Sekarang** mengarah ke section **Kontak**
-  (WhatsApp panitia) — pengguna tetap punya jalur pendaftaran yang valid.
-- Menu PMB diberi label kecil `via WA` sebagai penanda.
-
-Cara mengisi begitu URL resmi tersedia, cukup ubah satu baris:
-
-```js
-const PMB_URL = 'https://DOMAIN-PMB-RESMI.example/daftar';
+```
+https://siakad.alwafi.ac.id/register
 ```
 
-Tidak perlu menyentuh komponen mana pun.
+URL disimpan pada `PMB_URL` (paling atas pada berkas `siteConfig.js`). Bila suatu saat URL
+berubah, cukup ubah satu baris tersebut — komponen mana pun tidak perlu disentuh.
+
+Jika `PMB_URL` dikosongkan kembali, menu PMB dan semua tombol daftar otomatis mengarah ke
+section **Kontak** (WhatsApp panitia) sehingga pengguna tetap punya jalur pendaftaran yang valid.
+
+Label kecil **`via WA`** menempel pada menu **Kontak** karena jalur kontak panitia memang melalui
+WhatsApp. Label ini diatur lewat properti `badge` pada `navigation` di `siteConfig.js`, sehingga
+bisa dipindah atau dihapus tanpa mengubah komponen.
 
 ---
 
@@ -291,9 +289,10 @@ git push -u origin main
 
 ## 9. Hal yang masih menunggu dari pihak sekolah / panitia
 
-1. **URL pendaftaran (PMB) resmi** → isi `PMB_URL` di `src/config/siteConfig.js`.
-2. **QR code asli** pendaftaran dan informasi → ganti dua berkas placeholder di `public/images/`.
-3. **Foto pembicara/musyrif/peserta** → ganti `public/images/foto-pembicara-placeholder.jpg`.
-4. **Endpoint penyimpanan form** (opsional) → isi `FEEDBACK_WEBHOOK_URL`.
-5. **Konfirmasi data brosur** (tanggal, biaya) — data saat ini mengikuti brosur yang diberikan
+1. **QR code asli** pendaftaran dan informasi → ganti dua berkas placeholder di `public/images/`.
+2. **Foto pembicara/musyrif/peserta** → ganti `public/images/foto-pembicara-placeholder.jpg`.
+3. **Endpoint penyimpanan form** (opsional) → isi `FEEDBACK_WEBHOOK_URL`.
+4. **Konfirmasi data brosur** (tanggal, biaya) — data saat ini mengikuti brosur yang diberikan
    dan dapat berubah sewaktu-waktu.
+
+Sudah terpenuhi: URL pendaftaran (PMB) resmi → `https://siakad.alwafi.ac.id/register`.
