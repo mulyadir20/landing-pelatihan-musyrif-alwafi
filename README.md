@@ -124,10 +124,11 @@ Bagian yang sering diperbarui:
 | Path gambar              | `images`                             |
 | Kategori form masukan    | `feedbackCategories`                 |
 | **URL PMB (pendaftaran)**| `PMB_URL` (paling atas pada berkas)  |
+| Label tombol pendaftaran | `cta.label` (saat ini "PMB STIT")    |
 
 ### URL PMB (pendaftaran)
 
-Saat ini menu **PMB** dan seluruh tombol **Daftar Sekarang** mengarah ke URL pendaftaran resmi:
+Saat ini menu **PMB** dan seluruh tombol **PMB STIT** mengarah ke URL pendaftaran resmi:
 
 ```
 https://siakad.alwafi.ac.id/register

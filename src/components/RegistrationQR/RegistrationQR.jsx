@@ -65,7 +65,7 @@ export default function RegistrationQR() {
             rel={pmbUrl ? 'noopener noreferrer' : undefined}
           >
             <QrCode size={18} aria-hidden="true" />
-            Daftar Sekarang
+            {siteConfig.cta.label}
           </a>
           <p className="qr-section__note">
             <ShieldCheck size={15} aria-hidden="true" />

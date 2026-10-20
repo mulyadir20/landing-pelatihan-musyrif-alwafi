@@ -43,7 +43,7 @@ function NavLinks({ onNavigate, variant = 'desktop' }) {
           rel={getPmbUrl() ? 'noopener noreferrer' : undefined}
           onClick={onNavigate}
         >
-          Daftar Sekarang
+          {siteConfig.cta.label}
           <ChevronRight size={18} aria-hidden="true" />
         </a>
       </li>

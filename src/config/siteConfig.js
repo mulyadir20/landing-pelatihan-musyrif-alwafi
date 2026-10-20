@@ -63,6 +63,13 @@ const siteConfig = {
     { label: 'Saran & Masukan', href: '#saran-masukan' },
   ],
 
+  /** Label tombol pendaftaran (PMB). Berlaku untuk semua tombol "daftar"
+   *  di header, hero, biaya, dan section barcode. */
+  cta: {
+    label: 'PMB STIT',
+    url: PMB_URL,
+  },
+
   /** Kontak panitia */
   contact: {
     person: 'Ustadz Said',

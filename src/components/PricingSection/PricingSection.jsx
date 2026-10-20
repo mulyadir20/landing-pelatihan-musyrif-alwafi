@@ -64,7 +64,7 @@ export default function PricingSection() {
               target={pmbUrl ? '_blank' : undefined}
               rel={pmbUrl ? 'noopener noreferrer' : undefined}
             >
-              Daftar Sekarang
+              {siteConfig.cta.label}
             </a>
           </div>
         </div>

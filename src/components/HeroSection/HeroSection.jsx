@@ -56,7 +56,7 @@ export default function HeroSection() {
               target={pmbUrl ? '_blank' : undefined}
               rel={pmbUrl ? 'noopener noreferrer' : undefined}
             >
-              Daftar Sekarang
+              {siteConfig.cta.label}
             </a>
             <a className="btn btn--ghost-light" href="#informasi">
               <ArrowDown size={18} aria-hidden="true" />
