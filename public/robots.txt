@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ganti dengan domain final setelah situs di-deploy, misal:
+# Sitemap: https://domain-anda.vercel.app/sitemap.xml

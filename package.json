@@ -1,0 +1,26 @@
+{
+  "name": "landing-pelatihan-musyrif-alwafi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Landing Page Pelatihan Musyrif Profesional - STIT Al Wafi Bogor",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "optimize:assets": "python3 scripts/optimize-assets.py",
+    "test:api": "node scripts/test-api.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.545.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.2",
+    "vite": "^7.1.7"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

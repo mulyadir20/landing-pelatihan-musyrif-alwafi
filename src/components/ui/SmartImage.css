@@ -1,0 +1,33 @@
+.smart-image {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--stone-100);
+  width: 100%;
+}
+
+.smart-image__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.smart-image__img[role='button'] {
+  cursor: zoom-in;
+}
+
+.smart-image--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 1.5rem;
+  text-align: center;
+  background-image: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-600) 100%);
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--fs-xs);
+  border-radius: var(--radius-md);
+}
+
+.smart-image--fallback[role='button'] {
+  cursor: pointer;
+}
