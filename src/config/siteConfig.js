@@ -78,6 +78,18 @@ const siteConfig = {
     whatsappMessages: WHATSAPP_MESSAGES,
     institution: 'STIT Al Wafi Bogor',
     location: 'Kampus B Al Wafi, Jalan Pengasinan, Sawangan, Depok, Jawa Barat',
+
+    /** Peta lokasi (Google Maps).
+     *  `url`   = tautan resmi dari panitia; dipakai oleh alamat & tombol di footer.
+     *  `embedUrl` = endpoint embed resmi Google Maps (tanpa API key) yang dibuat
+     *  dari koordinat yang sama dengan `url`. Tautan goo.gl tidak bisa dipakai
+     *  langsung sebagai iframe karena Google menolak framing (X-Frame-Options). */
+    map: {
+      url: 'https://maps.app.goo.gl/ARfG2pYuMmYZr6Uv6',
+      embedUrl:
+        'https://www.google.com/maps?q=-6.4290864,106.7510048&z=17&hl=id&output=embed',
+      label: 'Buka di Google Maps',
+    },
   },
 
   /** Detail pelatihan (sumber: brosur resmi) */

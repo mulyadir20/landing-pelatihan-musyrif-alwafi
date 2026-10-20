@@ -1,5 +1,5 @@
-import { Phone, MapPin, Building2 } from 'lucide-react';
-import siteConfig, { getNavHref, getWhatsAppUrl } from '../../config/siteConfig';
+import { Phone, MapPin, Building2, ExternalLink } from 'lucide-react';
+import siteConfig, { getWhatsAppUrl } from '../../config/siteConfig';
 import './Footer.css';
 
 const { contact, images } = siteConfig;
@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="site-footer__grid">
-          {/* Identitas */}
+          {/* Logo */}
           <div className="site-footer__brand">
             <img
               className="site-footer__logo"
@@ -21,10 +21,6 @@ export default function Footer() {
               height="84"
               loading="lazy"
             />
-            <p className="site-footer__institution">{siteConfig.institution}</p>
-            <p className="site-footer__tagline">
-              {siteConfig.eventName} — Membentuk Murabbi, Pembina, dan Pemimpin Santri.
-            </p>
           </div>
 
           {/* Kontak */}
@@ -46,35 +42,42 @@ export default function Footer() {
               </li>
               <li>
                 <MapPin size={16} aria-hidden="true" />
-                <span>{contact.location}</span>
+                <span>
+                  Alamat:{' '}
+                  <a
+                    href={contact.map.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {contact.location}
+                  </a>
+                </span>
               </li>
               <li>
                 <Building2 size={16} aria-hidden="true" />
                 <span>{contact.institution}</span>
               </li>
             </ul>
-          </div>
 
-          {/* Navigasi */}
-          <div className="site-footer__col">
-            <h2 className="site-footer__heading">Navigasi</h2>
-            <ul className="site-footer__links" role="list">
-              {siteConfig.navigation.map((item) => {
-                const href = getNavHref(item.href);
-                const external = href.startsWith('http');
-                return (
-                  <li key={item.label}>
-                    <a
-                      href={href}
-                      target={external ? '_blank' : undefined}
-                      rel={external ? 'noopener noreferrer' : undefined}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            {/* Peta lokasi */}
+            <div className="site-footer__map">
+              <iframe
+                className="site-footer__map-frame"
+                src={contact.map.embedUrl}
+                title={`Peta lokasi ${contact.institution} — ${contact.location}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                className="site-footer__map-link"
+                href={contact.map.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={16} aria-hidden="true" />
+                {contact.map.label}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -82,7 +85,6 @@ export default function Footer() {
           <p>
             © {year} {siteConfig.institution}. Seluruh hak cipta dilindungi.
           </p>
-          <p className="site-footer__note">Pelatihan Musyrif Profesional — {contact.location}</p>
         </div>
       </div>
     </footer>

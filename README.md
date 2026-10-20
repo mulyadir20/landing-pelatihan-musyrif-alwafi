@@ -78,7 +78,8 @@ Urutan section di halaman (`src/App.jsx`):
 3. **Manfaat Pelatihan** (`#manfaat`) — Murabbi, Pembina, Pemimpin Santri
 4. **Kontak Panitia** (`#kontak`)
 5. **Saran & Masukan** (`#saran-masukan`)
-6. **Footer**
+6. **Footer** — logo, kolom Kontak (nomor WhatsApp, alamat), peta lokasi tertanam + tombol
+   "Buka di Google Maps", baris hak cipta
 
 > Section "Informasi Pelatihan", "Biaya Pendaftaran", dan "Pendaftaran dan Informasi Pelatihan"
 > (dua barcode) dihapus atas permintaan pemilik halaman. Bila ingin dikembalikan, komponennya
@@ -127,6 +128,7 @@ Bagian yang sering diperbarui:
 | Fasilitas                | `facilities`                         |
 | Manfaat pelatihan        | `benefits`                           |
 | Nama & nomor kontak      | `contact`                            |
+| Alamat & peta Google Maps| `contact.location`, `contact.map`    |
 | Pesan otomatis WhatsApp  | `contact.whatsappMessages`           |
 | Menu navigasi            | `navigation`                         |
 | Path gambar              | `images`                             |

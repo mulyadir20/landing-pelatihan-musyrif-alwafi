@@ -15,20 +15,6 @@
 .site-footer__logo {
   width: clamp(130px, 30vw, 170px);
   height: auto;
-  margin-bottom: 0.85rem;
-}
-
-.site-footer__institution {
-  font-family: var(--font-heading);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 0.5rem;
-}
-
-.site-footer__tagline {
-  font-size: var(--fs-xs);
-  max-width: 26rem;
 }
 
 .site-footer__heading {
@@ -67,21 +53,46 @@
   color: var(--gold-300);
 }
 
-.site-footer__links {
+/* Peta lokasi */
+.site-footer__map {
   display: grid;
-  gap: 0.6rem;
-  font-size: var(--fs-small);
+  gap: 0.75rem;
+  margin-top: 1.35rem;
 }
 
-.site-footer__links a {
-  display: inline-block;
-  color: var(--color-text-on-dark-muted);
-  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+.site-footer__map-frame {
+  width: 100%;
+  height: clamp(190px, 24vw, 250px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
-.site-footer__links a:hover {
+.site-footer__map-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--gold-500);
+  border-radius: var(--radius-sm);
   color: var(--gold-300);
-  transform: translateX(3px);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  justify-self: start;
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.site-footer__map-link svg {
+  flex-shrink: 0;
+}
+
+.site-footer__map-link:hover {
+  background-color: var(--gold-500);
+  color: var(--navy-900);
 }
 
 .site-footer__bottom {
@@ -95,12 +106,9 @@
   color: var(--stone-400);
 }
 
-.site-footer__note {
-  color: var(--stone-500);
-}
-
 @media (min-width: 720px) {
   .site-footer__grid {
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.7fr);
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.4fr);
+    align-items: start;
   }
 }
