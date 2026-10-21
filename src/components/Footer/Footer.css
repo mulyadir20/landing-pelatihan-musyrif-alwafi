@@ -15,6 +15,20 @@
 .site-footer__logo {
   width: clamp(130px, 30vw, 170px);
   height: auto;
+  margin-bottom: 0.85rem;
+}
+
+.site-footer__institution {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.site-footer__tagline {
+  font-size: var(--fs-xs);
+  max-width: 26rem;
 }
 
 .site-footer__heading {

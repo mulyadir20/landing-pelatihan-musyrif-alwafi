@@ -21,6 +21,10 @@ export default function Footer() {
               height="84"
               loading="lazy"
             />
+            <p className="site-footer__institution">{siteConfig.institution}</p>
+            <p className="site-footer__tagline">
+              {siteConfig.eventName} — Membentuk Murabbi, Pembina, dan Pemimpin Santri.
+            </p>
           </div>
 
           {/* Kontak */}
