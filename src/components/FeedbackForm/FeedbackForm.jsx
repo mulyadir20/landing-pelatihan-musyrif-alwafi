@@ -6,8 +6,12 @@ import './FeedbackForm.css';
 
 const { feedback } = siteConfig;
 
-/** Tinggi awal iframe sebelum Google melaporkan tinggi aslinya (px). */
-const INITIAL_HEIGHT = 720;
+/**
+ * Tinggi awal iframe sebelum Google melaporkan tinggi aslinya (px).
+ * Nilai ini mengikuti tinggi total kartu formulir sebelumnya (2 kolom isian,
+ * 1 pilihan kategori, 1 area pesan ± 140 px, pesan bantuan, dan tombol kirim).
+ */
+const INITIAL_HEIGHT = 875;
 
 /** Batas aman tinggi iframe agar tidak pernah memenuhi seluruh layar. */
 const MAX_HEIGHT = 1800;
