@@ -46,3 +46,37 @@ resminya — hanya perlu sekali dan tidak menyentuh kode situs.
   menyesuaikan otomatis lewat `postMessage` dari Google Forms.
 - Kalau suatu saat judul ingin dikembalikan, cukup isi lagi judul & deskripsi
   di editor Google Form — tidak ada perubahan kode yang diperlukan.
+
+## Bila muncul "Formulir tanpa judul"
+
+Google tidak mengizinkan judul form benar-benar kosong: setelah dikosongkan,
+judul otomatis diisi **"Formulir tanpa judul"** sehingga masih ada satu baris
+teks terlihat di dalam iframe.
+
+Untuk menghilangkannya, jalankan skrip
+[`scripts/HideFormHeader.gs`](./scripts/HideFormHeader.gs). Skrip ini mengisi
+judul & deskripsi form dengan karakter tak terlihat (zero-width space), yaitu
+karakter yang tetap dianggap "ada" oleh Google tetapi tidak menghasilkan piksel
+apa pun.
+
+Langkahnya:
+
+1. [script.google.com](https://script.google.com) → **New project**
+2. Tempel isi `docs/scripts/HideFormHeader.gs`
+3. Pilih fungsi `hideFormHeader` → **Run** → izinkan akses
+4. Periksa **Execution log** (`berhasil via setTitle` / `berhasil via
+   pageBreakItem` = berhasil; `GAGAL` = tidak bisa)
+5. Muat ulang situs dan periksa hasilnya
+
+Fungsi pendukung pada skrip yang sama:
+
+| Fungsi | Kegunaan |
+| --- | --- |
+| `hideFormHeader` | Menyembunyikan judul & deskripsi form |
+| `checkHeader` | Menampilkan judul form & daftar item untuk diagnosis |
+| `restoreHeader` | Mengembalikan judul & deskripsi seperti semula |
+
+> Catatan: jalur alternatif berupa *crop* iframe dengan offset negatif tidak
+> dianjurkan. Tinggi baris judul tidak tetap, dan Google Form menjalankan
+> `scrollIntoView` saat field diisi sehingga crop manual bisa bergeser dan
+> memotong pertanyaan pertama.
