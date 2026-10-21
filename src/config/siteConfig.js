@@ -150,18 +150,6 @@ const siteConfig = {
   ],
 
   /**
-   * Formulir Saran & Masukan (Google Form).
-   *
-   * Kosongkan `googleFormUrl` untuk menampilkan tombol tautan saja.
-   * Isi dengan URL embed Google Form (akhiran `?embedded=true`) agar form
-   * tampil langsung di dalam halaman. Panduan lengkap:
-   * integrations/google-form/README.md
-   */
-  feedback: {
-    googleFormUrl: '',
-  },
-
-  /**
    * Aset gambar.
    * Untuk mengganti gambar: letakkan file baru di public/images/
    * lalu ubah path di bawah ini (atau cukup ganti nama file yang sama).
