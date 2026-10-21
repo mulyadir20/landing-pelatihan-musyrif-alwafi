@@ -73,12 +73,13 @@ export default function HeroSection() {
               imgClassName="hero__flyer-img"
               src={images.flyer.src}
               srcSet={images.flyer.srcSet}
-              sizes="(max-width: 900px) 88vw, 420px"
+              sizes={images.flyer.sizes}
               alt={images.flyer.alt}
               width={images.flyer.width}
               height={images.flyer.height}
               objectFit="contain"
               loading="eager"
+              fetchPriority="high"
               decoding="async"
               fallbackLabel="Brosur belum tersedia"
               onClick={() => setPreviewOpen(true)}

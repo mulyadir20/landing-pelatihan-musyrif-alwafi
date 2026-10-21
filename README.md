@@ -46,9 +46,10 @@ musyrif/
 │   ├── favicon.png                   # Ikon tab (dari situs resmi Al Wafi)
 │   └── images/
 │       ├── logo-stit-al-wafi.png     # Logo resmi STIT Al Wafi (dari alwafi.ac.id)
-│       ├── flyer-musyrif.webp        # Flyer utama (tampilan penuh / lightbox)
+│       ├── flyer-musyrif.webp        # Flyer utama (lightbox)
 │       ├── flyer-musyrif-640.webp    # Flyer versi kecil (srcset layar kecil)
-│       ├── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
+│       ├── flyer-musyrif-800.webp    # Flyer versi sedang (srcset retina sedang)
+│       ├── flyer-musyrif-1280.webp   # Flyer versi besar (srcset retina besar)
 │       └── og-pelatihan-musyrif.jpg  # Gambar preview WhatsApp (Open Graph) 1200×630
 ├── scripts/
 │   ├── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
@@ -168,7 +169,10 @@ bisa dipindah atau dihapus tanpa mengubah komponen.
 3. Perbarui `images.flyer.width` / `height` agar rasio aspek tetap benar.
 
 Catatan: versi yang tampil sekarang adalah hasil optimasi dari `brosur.png` (2079×2954 px,
-3,0 MB) menjadi WebP 1440 px (±245 KB), 1280 px (±193 KB), dan 640 px (±75 KB) agar hemat kuota.
+3,0 MB) menjadi WebP 1440 px (±245 KB, untuk lightbox), 1280 px (±193 KB), 800 px
+(±109 KB), dan 640 px (±75 KB). Browser memilih varian lewat `srcSet`/`sizes` sesuai lebar
+slot kartu hero (maks 399 px) dan kerapatan piksel layar, sehingga perangkat biasa tidak
+perlu mengunduh berkas 1280 px.
 Untuk mengembalikan versi PNG atau membuat versi baru:
 
 ```bash
@@ -280,7 +284,30 @@ belum berubah setelah deploy:
 
 ---
 
-## 8. Deploy ke Vercel
+## 8. Performa
+
+Halaman ini sudah dioptimalkan agar cepat dibuka di jaringan seluler:
+
+| Optimasi | Detail |
+| --- | --- |
+| **Pemisahan chunk vendor** | `react`/`react-dom` (221 kB) dipecah ke chunk terpisah dari kode aplikasi (18 kB), sehingga saat konten diperbarui pengunjung hanya mengunduh ±18 kB, bukan seluruh bundel. |
+| **Lazy-load Google Form** | Section Saran & Masukan (`FeedbackForm`) dipecah dengan `React.lazy` dan baru diunduh saat section-nya didekati, sehingga iframe Google tidak menghambat tampilan awal. |
+| **Font minimal** | Hanya berat yang benar-benar dipakai (Inter 400/600, Poppins 600). Stylesheet font dimuat non-blocking (`media="print"` + `onload`) dengan fallback `<noscript>`, sehingga teks langsung tampil memakai font sistem. |
+| **Gambar adaptif** | `srcSet` 640/800/1280 px dengan `sizes` sesuai lebar slot kartu (399 px), sehingga perangkat biasa tidak mengunduh berkas 1280 px. |
+| **`fetchPriority="high"`** | Diberikan pada flyer hero (gambar LCP) agar browser memprioritaskan unduhannya. |
+| **Cache aset** | `/assets/*`, `/images/*`, dan `/fonts/*` di-cache 1 tahun `immutable` lewat `vercel.json` (nama berkas ber-hash, aman). |
+| **Dimensi eksplisit** | Semua gambar punya `width`/`height` agar tidak terjadi pergeseran tata letak (CLS). |
+
+Di Vercel, aset juga dikirim dengan kompresi **Brotli** otomatis (mis. chunk React 221 kB
+menjadi ±55 kB saat dikirim).
+
+> Catatan: `npm run build` menampilkan ukuran **mentah** sebelum kompresi. Yang benar-benar
+> diunduh pengunjung adalah versi Brotli/gzip dari Vercel.
+
+---
+
+## 9. Deploy ke Vercel
+
 ### Langkah A — siapkan Git (sekali saja)
 
 ```bash
@@ -316,7 +343,7 @@ git push -u origin main
 
 ---
 
-## 9. Pemeriksaan yang sudah dijalankan
+## 10. Pemeriksaan yang sudah dijalankan
 
 | Pemeriksaan                                             | Hasil  |
 | ------------------------------------------------------- | ------ |
@@ -325,6 +352,10 @@ git push -u origin main
 | Metadata Open Graph hadir di HTML awal (tanpa JS)        | ✅ |
 | Gambar OG masuk ke `dist/images/` dan 1200×630 px        | ✅ |
 | `npm run make:og` (regenerasi gambar preview)            | ✅ lulus |
+| Pemisahan chunk vendor (react 221 kB / app 18 kB)        | ✅ |
+| Lazy-load section Google Form (`FeedbackForm`)           | ✅ |
+| Semua aset mengembalikan status 200                      | ✅ |
+| `vercel.json` tervalidasi (JSON sah)                     | ✅ |
 | Uji runtime Chromium headless pada 6 lebar layar (320, 375, 430, 768, 1366, 1920 px) — 65 pemeriksaan | ✅ lulus |
 | — Tidak ada overflow horizontal                         | ✅ |
 | — Semua section ada, satu `h1`, hierarki heading rapi   | ✅ |
@@ -340,7 +371,7 @@ git push -u origin main
 
 ---
 
-## 10. Hal yang masih menunggu dari pihak sekolah / panitia
+## 11. Hal yang masih menunggu dari pihak sekolah / panitia
 
 1. **Konfirmasi data brosur** (tanggal, waktu, tempat) — data saat ini mengikuti brosur yang
    diberikan dan dapat berubah sewaktu-waktu.

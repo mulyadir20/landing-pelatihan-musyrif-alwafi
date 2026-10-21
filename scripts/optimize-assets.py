@@ -9,6 +9,7 @@ Kebutuhan: Python 3 + Pillow (`pip install Pillow`)
 
 Yang dihasilkan:
   public/images/flyer-musyrif-640.webp      -> flyer untuk layar kecil (srcset)
+  public/images/flyer-musyrif-800.webp      -> flyer untuk retina layar sedang (srcset)
   public/images/flyer-musyrif-1280.webp     -> flyer untuk layar besar (srcset)
   public/images/flyer-musyrif.webp          -> flyer ukuran penuh (lightbox)
   public/images/foto-pembicara-placeholder.jpg -> foto representatif placeholder
@@ -58,6 +59,7 @@ def make_flyer():
     print(f"[flyer] sumber {w}x{h}")
     for target_w, name, save_kwargs in [
         (640, "flyer-musyrif-640.webp", {"quality": 86, "method": 6}),
+        (800, "flyer-musyrif-800.webp", {"quality": 88, "method": 6}),
         (1280, "flyer-musyrif-1280.webp", {"quality": 88, "method": 6}),
         (1440, "flyer-musyrif.webp", {"quality": 90, "method": 6}),
     ]:

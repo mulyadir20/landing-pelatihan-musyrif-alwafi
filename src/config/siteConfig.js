@@ -170,11 +170,17 @@ const siteConfig = {
     logo: '/images/logo-stit-al-wafi.png',
     flyer: {
       src: '/images/flyer-musyrif.webp',
-      srcSet: '/images/flyer-musyrif-640.webp 640w, /images/flyer-musyrif-1280.webp 1280w',
+      // Varian srcSet: 640 (layar kecil), 800 (retina layar sedang),
+      // 1280 (retina layar besar). Dipilih browser sesuai lebar slot + DPR.
+      srcSet:
+        '/images/flyer-musyrif-640.webp 640w, /images/flyer-musyrif-800.webp 800w, /images/flyer-musyrif-1280.webp 1280w',
       alt: 'Brosur resmi Pelatihan Musyrif Profesional STIT Al Wafi Bogor',
       // Rasio aspek flyer: 1440 x 2046 (≈ 0.70)
       width: 1440,
       height: 2046,
+      // Lebar slot gambar di hero (kartu maks 420px dikurangi padding).
+      // Dipakai sebagai nilai `sizes` agar browser memilih varian tepat.
+      sizes: '(max-width: 900px) 88vw, 399px',
     },
   },
 

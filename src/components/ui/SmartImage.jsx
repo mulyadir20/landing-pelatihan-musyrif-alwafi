@@ -21,6 +21,7 @@ export default function SmartImage({
   height,
   loading = 'lazy',
   decoding = 'async',
+  fetchPriority,
   className = '',
   imgClassName = '',
   ratio,
@@ -69,6 +70,7 @@ export default function SmartImage({
         height={height}
         loading={loading}
         decoding={decoding}
+        fetchPriority={fetchPriority}
         style={{ objectFit }}
         onClick={onClick}
         onKeyDown={

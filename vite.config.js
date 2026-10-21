@@ -7,12 +7,18 @@ export default defineConfig({
   build: {
     target: 'es2020',
     sourcemap: false,
-    // Pisahkan vendor chunk agar caching di Vercel lebih efisien
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          icons: ['lucide-react'],
+        // Pisahkan vendor agar caching di Vercel lebih efisien: React jarang
+        // berubah, sedangkan kode aplikasi sering ikut berubah tiap deploy.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('react-dom') || id.includes('/react/') || id.includes('scheduler')) {
+            return 'react';
+          }
+          return 'vendor';
         },
       },
     },

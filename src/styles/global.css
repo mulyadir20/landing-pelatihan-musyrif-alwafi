@@ -103,6 +103,11 @@ ol[role='list'] {
   background-color: var(--stone-50);
 }
 
+/* Placeholder saat komponen section sedang diunduh (React.lazy) */
+.section--loading {
+  min-height: 32rem;
+}
+
 /* Judul section */
 .section-heading {
   max-width: 46rem;
