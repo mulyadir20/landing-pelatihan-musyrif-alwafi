@@ -40,6 +40,8 @@ musyrif/
 ├── package.json
 ├── vite.config.js
 ├── vercel.json                       # Konfigurasi deploy Vercel
+├── docs/
+│   └── google-form-tanpa-header.md   # Cara mematikan judul di dalam Google Form
 ├── public/
 │   ├── favicon.png                   # Ikon tab (dari situs resmi Al Wafi)
 │   └── images/
@@ -218,6 +220,10 @@ Cara kerjanya:
 Mengubah pertanyaan/kategori dilakukan langsung di editor Google Form; URL embed tidak
 berubah sehingga situs tidak perlu di-deploy ulang. Jawaban tersimpan di Spreadsheet yang
 terhubung ke form tersebut.
+
+Agar header form tidak tampil ganda dengan judul section di situs, judul & deskripsi di
+dalam Google Form dikosongkan sehingga form langsung dimulai dari pertanyaan **Nama**.
+Panduannya: [`docs/google-form-tanpa-header.md`](docs/google-form-tanpa-header.md).
 
 ---
 
