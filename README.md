@@ -7,8 +7,9 @@ Ringkasan proyek:
 
 - Halaman statis + beberapa interaksi (menu mobile, lightbox brosur, formulir saran & masukan)
 - Konfigurasi informasi kegiatan terpusat dalam **satu berkas**
-- Siap di-deploy ke **Vercel** (termasuk endpoint serverless untuk formulir)
+- Siap di-deploy ke **Vercel** sebagai situs statis
 - Tanpa database, tanpa API key, tanpa layanan eksternal yang dipaksakan
+- Formulir saran & masukan memakai **Google Form** yang di-embed (data disimpan Google)
 
 ---
 
@@ -22,7 +23,7 @@ Ringkasan proyek:
 | Ikon         | lucide-react                                   |
 | Styling      | CSS biasa per komponen + design token global   |
 | Font         | Poppins (judul) & Inter (teks) — Google Fonts  |
-| Backend      | 1 fungsi serverless Vercel (`api/feedback.js`) |
+| Formulir     | Google Form (embed iframe)                     |
 | Package manager | npm                                       |
 
 Identitas visual (warna navy + aksen emas, netral `#FAF8F5`, font Poppins/Inter) mengikuti
@@ -39,19 +40,19 @@ musyrif/
 ├── package.json
 ├── vite.config.js
 ├── vercel.json                       # Konfigurasi deploy Vercel
-├── .env.example                      # Contoh environment variable (tanpa rahasia)
-├── api/
-│   └── feedback.js                   # Endpoint serverless formulir saran & masukan
+├── integrations/
+│   └── google-form/
+│       ├── CreateForm.gs             # Skrip pembuat Google Form saran & masukan
+│       └── README.md                 # Panduan menyiapkan Google Form
 ├── public/
 │   ├── favicon.png                   # Ikon tab (dari situs resmi Al Wafi)
 │   └── images/
 │       ├── logo-stit-al-wafi.png     # Logo resmi STIT Al Wafi (dari alwafi.ac.id)
 │       ├── flyer-musyrif.webp        # Flyer utama (tampilan penuh / lightbox)
 │       ├── flyer-musyrif-640.webp    # Flyer versi kecil (srcset layar kecil)
-│       └── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
+│       ├── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
 ├── scripts/
-│   ├── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
-│   └── test-api.mjs                  # Uji lokal endpoint serverless
+│   └── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
 └── src/
     ├── main.jsx
     ├── App.jsx
@@ -66,7 +67,7 @@ musyrif/
         ├── FacilitiesSection/        # Fasilitas yang didapat peserta
         ├── BenefitsSection/          # Manfaat: Murabbi, Pembina, Pemimpin Santri
         ├── ContactSection/           # Kontak panitia + tombol WhatsApp
-        ├── FeedbackForm/             # Formulir saran & masukan
+        ├── FeedbackForm/             # Embed Google Form saran & masukan
         ├── Footer/
         └── ui/                       # SmartImage, Lightbox, SectionHeading
 ```
@@ -108,7 +109,6 @@ npm run preview
 Skrip tambahan:
 
 ```bash
-npm run test:api         # Uji lokal logika endpoint api/feedback.js
 npm run optimize:assets  # Regenerasi aset gambar dari brosur.png (butuh Python + Pillow)
 ```
 
@@ -133,6 +133,7 @@ Bagian yang sering diperbarui:
 | Menu navigasi            | `navigation`                         |
 | Path gambar              | `images`                             |
 | Kategori form masukan    | `feedbackCategories`                 |
+| URL Google Form masukan  | `feedback.googleFormUrl`             |
 | **URL PMB (pendaftaran)**| `PMB_URL` (paling atas pada berkas)  |
 | Label tombol pendaftaran | `cta.label` (saat ini "PMB STIT")    |
 
@@ -201,28 +202,22 @@ python3 scripts/optimize-assets.py     # memunculkan kembali foto & QR placehold
 
 ---
 
-## 6. Formulir Saran & Masukan
+## 6. Formulir Saran & Masukan (Google Form)
 
-Alur formulir dirancang agar **tidak pernah menampilkan status sukses palsu**:
+Section **Saran & Masukan** menampilkan **Google Form** resmi panitia di dalam
+halaman (iframe). Seluruh jawaban disimpan oleh Google, sehingga situs ini
+tidak memerlukan backend maupun environment variable.
 
-1. Validasi dilakukan di sisi klien (nama & email opsional, kategori & pesan wajib).
-2. Data dikirim ke `POST /api/feedback` (endpoint serverless Vercel) yang **memvalidasi ulang**
-   di sisi server.
-3. Bila `FEEDBACK_WEBHOOK_URL` belum diisi di environment variable Vercel, server menolak
-   dengan status **503** dan pengguna melihat keterangan jujur bahwa pengiriman belum aktif.
-4. Bila sudah diisi, data diteruskan ke URL tersebut (Google Apps Script Web App, Zapier/Make,
-   atau layanan internal sekolah).
+Ringkasnya:
 
-Mengaktifkan pengiriman:
+1. Form dibuat otomatis lewat skrip `integrations/google-form/CreateForm.gs`.
+2. Jawaban otomatis tersimpan ke Google Spreadsheet (tab "Form Responses 1").
+3. URL embed ditempel ke `feedback.googleFormUrl` di `src/config/siteConfig.js`.
 
-```bash
-# Salin .env.example menjadi .env (lokal) lalu isi, atau set di dashboard Vercel:
-FEEDBACK_WEBHOOK_URL=https://script.google.com/macros/s/XXXX/exec
-```
+Panduan lengkap langkah demi langkah: [`integrations/google-form/README.md`](integrations/google-form/README.md).
 
-Catatan keamanan: endpoint membatasi laju kiriman per IP (15 detik), memvalidasi kategori
-terhadap daftar resmi, dan mengabaikan kiriman dari kolom honeypot (anti-bot). Tidak ada
-kredensial yang disimpan di frontend.
+Perilaku saat URL belum diisi: section menampilkan keterangan bahwa formulir
+sedang disiapkan, bukan form kosong atau status sukses palsu.
 
 ---
 
@@ -254,8 +249,8 @@ git push -u origin main
 
 ### Langkah C — opsional
 
-- **Form saran & masukan aktif**: Settings → Environment Variables → tambahkan
-  `FEEDBACK_WEBHOOK_URL`, lalu redeploy.
+- **Google Form saran & masukan**: ikuti `integrations/google-form/README.md`, lalu tempel URL
+  embed ke `feedback.googleFormUrl` di `src/config/siteConfig.js`, commit, push.
 - **URL PMB**: ubah `PMB_URL` di `src/config/siteConfig.js`, commit, push.
 - **Metadata sosial**: setelah domain final diketahui, isi URL absolut pada `og:image` dan
   tambahkan kembali `<link rel="canonical">` di `index.html` (tag canonical sengaja tidak
@@ -269,14 +264,13 @@ git push -u origin main
 | ------------------------------------------------------- | ------ |
 | `npm run build`                                         | ✅ lulus |
 | `npm run dev` dan `npm run preview`                     | ✅ lulus |
-| `npm run test:api` (13 kasus endpoint serverless)       | ✅ lulus |
 | Uji runtime Chromium headless pada 6 lebar layar (320, 375, 430, 768, 1366, 1920 px) — 65 pemeriksaan | ✅ lulus |
 | — Tidak ada overflow horizontal                         | ✅ |
 | — Semua section ada, satu `h1`, hierarki heading rapi   | ✅ |
 | — Semua gambar termuat dan memiliki `alt`                | ✅ |
 | — Menu mobile terbuka/tutup, anchor tidak tertutup header | ✅ |
 | — Lightbox brosur terbuka/tutup                         | ✅ |
-| — Form menolak input kosong/tidak valid tanpa sukses palsu | ✅ |
+| — Section saran & masukan tampil (form atau keterangan jujur) | ✅ |
 | — Tidak ada error console                               | ✅ |
 | — Target sentuh utama ≥ 44 px                           | ✅ |
 
@@ -287,7 +281,8 @@ git push -u origin main
 
 ## 9. Hal yang masih menunggu dari pihak sekolah / panitia
 
-1. **Endpoint penyimpanan form** (opsional) → isi `FEEDBACK_WEBHOOK_URL`.
+1. **Google Form saran & masukan** → buat lewat skrip `integrations/google-form/CreateForm.gs`,
+   lalu isi `feedback.googleFormUrl` di `src/config/siteConfig.js`.
 2. **Konfirmasi data brosur** (tanggal, waktu, tempat) — data saat ini mengikuti brosur yang
    diberikan dan dapat berubah sewaktu-waktu.
 
