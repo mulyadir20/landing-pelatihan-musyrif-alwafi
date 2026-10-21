@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "optimize:assets": "python3 scripts/optimize-assets.py"
+    "optimize:assets": "python3 scripts/optimize-assets.py",
+    "make:og": "python3 scripts/make-og-image.py"
   },
   "dependencies": {
     "lucide-react": "^0.545.0",

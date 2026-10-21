@@ -48,9 +48,11 @@ musyrif/
 │       ├── logo-stit-al-wafi.png     # Logo resmi STIT Al Wafi (dari alwafi.ac.id)
 │       ├── flyer-musyrif.webp        # Flyer utama (tampilan penuh / lightbox)
 │       ├── flyer-musyrif-640.webp    # Flyer versi kecil (srcset layar kecil)
-│       └── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
+│       ├── flyer-musyrif-1280.webp   # Flyer versi sedang (srcset layar besar)
+│       └── og-pelatihan-musyrif.jpg  # Gambar preview WhatsApp (Open Graph) 1200×630
 ├── scripts/
-│   └── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
+│   ├── optimize-assets.py            # Regenerasi aset dari brosur.png (opsional)
+│   └── make-og-image.py              # Regenerasi gambar preview WhatsApp 1200×630
 └── src/
     ├── main.jsx
     ├── App.jsx
@@ -108,6 +110,7 @@ Skrip tambahan:
 
 ```bash
 npm run optimize:assets  # Regenerasi aset gambar dari brosur.png (butuh Python + Pillow)
+npm run make:og          # Regenerasi gambar preview WhatsApp (Open Graph) 1200×630
 ```
 
 ---
@@ -227,8 +230,57 @@ Panduannya: [`docs/google-form-tanpa-header.md`](docs/google-form-tanpa-header.m
 
 ---
 
-## 7. Deploy ke Vercel
+## 7. Preview WhatsApp (Open Graph)
 
+Saat tautan situs dibagikan di WhatsApp, muncul kartu preview berisi gambar, judul, dan
+deskripsi. Semua tag diletakkan langsung di `index.html` (HTML awal), **bukan** disisipkan
+React, karena crawler WhatsApp tidak menjalankan JavaScript.
+
+| Tag | Nilai |
+| --- | --- |
+| `og:title` | Pelatihan Musyrif Profesional \| STIT Al Wafi Bogor |
+| `og:description` | Membentuk Musyrif Profesional sebagai Murabbi, Pembina, dan Pemimpin Santri. Informasi kegiatan, biaya pendaftaran, dan fasilitas pelatihan. |
+| `og:url` / `canonical` | `https://landing-pelatihan-musyrif-alwafi.vercel.app/` |
+| `og:image` | `https://landing-pelatihan-musyrif-alwafi.vercel.app/images/og-pelatihan-musyrif.jpg` |
+| `og:image:width` / `height` | 1200 / 630 |
+| `twitter:card` | `summary_large_image` |
+
+Catatan penerapan:
+
+- **URL gambar absolut** (wajib). URL relatif seperti `/images/...` diabaikan crawler.
+- Gambar disimpan di `public/images/og-pelatihan-musyrif.jpg` sehingga ikut tersalin ke
+  `dist/images/` saat build, dan dapat diakses publik tanpa login.
+- Gambar dibuat ulang dengan `npm run make:og` (komposisi landscape 1200×630: panel navy
+  berisi judul + logo, panel kanan flyer portrait yang **dipotong** alih-alih diregangkan).
+
+### Mengganti domain produksi
+
+Bila nanti memakai domain kustom (mis. `pelatihan-musyrif.alwafi.ac.id`), perbarui
+**empat tempat** di `index.html`: `og:url`, `og:image`, `og:image:secure_url`,
+`twitter:image`, dan `canonical`. Setelah itu commit + push.
+
+### Menguji preview
+
+WhatsApp menyimpan cache preview cukup lama (biasanya 24 jam, bisa lebih). Bila preview
+belum berubah setelah deploy:
+
+1. Uji metadata dengan crawler lain lebih dulu — buka
+   [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) atau
+   [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) lalu tempel URL situs.
+   Keduanya menampilkan gambar & judul yang akan dibaca crawler.
+2. Jika di sana sudah benar, berarti cache WhatsApp. Uji dengan **menambahkan parameter
+   unik** ke URL saat dibagikan, mis. `https://landing-pelatihan-musyrif-alwafi.vercel.app/?v=2`
+   — WhatsApp memperlakukannya sebagai tautan baru sehingga mengambil metadata terbaru.
+3. Cara paling pasti: tunggu cache kedaluwarsa, atau bagikan ke kontak yang belum pernah
+   menerima tautan tersebut.
+
+> Preview WhatsApp **tidak dapat diverifikasi dari sisi server** — WhatsApp tidak
+> menyediakan API publik untuk pratinjau tautan. Verifikasi dilakukan lewat crawler
+> pembanding di atas.
+
+---
+
+## 8. Deploy ke Vercel
 ### Langkah A — siapkan Git (sekali saja)
 
 ```bash
@@ -264,12 +316,15 @@ git push -u origin main
 
 ---
 
-## 8. Pemeriksaan yang sudah dijalankan
+## 9. Pemeriksaan yang sudah dijalankan
 
 | Pemeriksaan                                             | Hasil  |
 | ------------------------------------------------------- | ------ |
 | `npm run build`                                         | ✅ lulus |
 | `npm run dev` dan `npm run preview`                     | ✅ lulus |
+| Metadata Open Graph hadir di HTML awal (tanpa JS)        | ✅ |
+| Gambar OG masuk ke `dist/images/` dan 1200×630 px        | ✅ |
+| `npm run make:og` (regenerasi gambar preview)            | ✅ lulus |
 | Uji runtime Chromium headless pada 6 lebar layar (320, 375, 430, 768, 1366, 1920 px) — 65 pemeriksaan | ✅ lulus |
 | — Tidak ada overflow horizontal                         | ✅ |
 | — Semua section ada, satu `h1`, hierarki heading rapi   | ✅ |
@@ -285,7 +340,7 @@ git push -u origin main
 
 ---
 
-## 9. Hal yang masih menunggu dari pihak sekolah / panitia
+## 10. Hal yang masih menunggu dari pihak sekolah / panitia
 
 1. **Konfirmasi data brosur** (tanggal, waktu, tempat) — data saat ini mengikuti brosur yang
    diberikan dan dapat berubah sewaktu-waktu.
