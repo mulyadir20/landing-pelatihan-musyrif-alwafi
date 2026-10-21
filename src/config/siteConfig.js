@@ -139,7 +139,7 @@ const siteConfig = {
     },
   ],
 
-  /** Kategori pada formulir saran & masukan */
+  /** Kategori pada formulir saran & masukan (cadangan, tidak dipakai Google Form) */
   feedbackCategories: [
     'Saran perbaikan',
     'Masukan materi',
@@ -148,6 +148,18 @@ const siteConfig = {
     'Pertanyaan umum',
     'Lainnya',
   ],
+
+  /**
+   * Formulir Saran & Masukan (Google Form yang di-embed).
+   *
+   * URL diambil dari menu "Sematkan" (Embed) di editor Google Form.
+   * Parameter `?embedded=true` wajib ada agar form tampil di dalam iframe.
+   * Tinggi iframe menyesuaikan otomatis mengikuti tinggi konten form.
+   */
+  feedback: {
+    googleFormUrl:
+      'https://docs.google.com/forms/d/e/1FAIpQLSffi3M7V9JL_UTIDfbMjp6jZcTRHy4Z_Wp2s6QSIutSpE9wDA/viewform?embedded=true',
+  },
 
   /**
    * Aset gambar.

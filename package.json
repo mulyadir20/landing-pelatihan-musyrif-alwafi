@@ -8,8 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "optimize:assets": "python3 scripts/optimize-assets.py",
-    "test:api": "node scripts/test-api.mjs"
+    "optimize:assets": "python3 scripts/optimize-assets.py"
   },
   "dependencies": {
     "lucide-react": "^0.545.0",
