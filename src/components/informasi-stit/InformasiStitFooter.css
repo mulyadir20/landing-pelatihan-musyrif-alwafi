@@ -1,0 +1,10 @@
+@import url('../../components/Footer/Footer.css');
+
+.site-footer__pmb {
+  margin-top: 1rem;
+}
+
+.site-footer__pmb-btn {
+  min-height: 44px;
+  padding-inline: 1.25rem;
+}

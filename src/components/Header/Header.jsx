@@ -1,17 +1,14 @@
 import { useEffect, useId, useState } from 'react';
 import { Menu, X, ChevronRight } from 'lucide-react';
-import siteConfig, { getNavHref, getPmbUrl, getWhatsAppUrl } from '../../config/siteConfig';
+import siteConfig, { getNavHref, getWhatsAppUrl } from '../../config/siteConfig';
 import './Header.css';
 
 const LOGO = siteConfig.images.logo;
 
 function NavLinks({ onNavigate, variant = 'desktop' }) {
-  const pmbUrl = getPmbUrl();
-
   return (
     <ul className={`nav nav--${variant}`} role="list">
       {siteConfig.navigation.map((item) => {
-        const isPmb = item.href === 'pmb';
         const href = getNavHref(item.href);
         const external = href.startsWith('http');
 
@@ -23,11 +20,6 @@ function NavLinks({ onNavigate, variant = 'desktop' }) {
               onClick={onNavigate}
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
-              title={
-                isPmb && !pmbUrl
-                  ? 'URL PMB resmi belum dikonfigurasi — diarahkan ke kontak panitia'
-                  : undefined
-              }
             >
               {item.label}
               {item.badge && <span className="nav__link-note">{item.badge}</span>}
@@ -37,13 +29,11 @@ function NavLinks({ onNavigate, variant = 'desktop' }) {
       })}
       <li className="nav__cta-item">
         <a
-          className="btn btn--gold nav__cta"
-          href={getNavHref('pmb')}
-          target={getPmbUrl() ? '_blank' : undefined}
-          rel={getPmbUrl() ? 'noopener noreferrer' : undefined}
+          className="btn btn--gold nav__cta nav__cta--info"
+          href="/informasi-stit"
           onClick={onNavigate}
         >
-          {siteConfig.cta.label}
+          INFORMASI STIT
           <ChevronRight size={18} aria-hidden="true" />
         </a>
       </li>

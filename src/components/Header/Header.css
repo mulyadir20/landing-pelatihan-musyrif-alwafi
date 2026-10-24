@@ -107,6 +107,22 @@
   padding-inline: 1.15rem;
 }
 
+.nav__cta--info {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.45);
+  border: 2px solid var(--gold-300);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.nav__cta--info:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(197, 160, 89, 0.6);
+  background-color: var(--gold-600);
+  color: var(--white);
+}
+
 /* Tombol hamburger */
 .site-header__toggle {
   display: inline-flex;

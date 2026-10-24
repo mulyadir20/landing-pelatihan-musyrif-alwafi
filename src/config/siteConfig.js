@@ -53,12 +53,11 @@ const siteConfig = {
     'Pelatihan terapan bagi guru, pengasuh, dan pengelola pendidikan Islam untuk meningkatkan ' +
     'kualitas bimbingan, pembinaan, dan kepemimpinan di lingkungan pesantren serta sekolah.',
 
-  /** Menu navigasi. `href` berupa anchor internal atau URL eksternal.
+  /** Menu navigasi. `href` berupa anchor internal, rute internal, atau URL eksternal.
    *  Tulis 'pmb' untuk mengikuti konfigurasi PMB_URL di atas.
    *  `badge` (opsional) menampilkan label kecil di samping menu. */
   navigation: [
     { label: 'Home', href: '#home' },
-    { label: 'PMB', href: 'pmb' },
     { label: 'Kontak', href: '#kontak', badge: 'via WA' },
     { label: 'Saran & Masukan', href: '#saran-masukan' },
   ],

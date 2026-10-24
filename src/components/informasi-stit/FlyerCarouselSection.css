@@ -1,0 +1,334 @@
+.fc-section {
+  background: radial-gradient(circle at top, rgba(217, 181, 76, 0.12), transparent 60%), #f5f0e6;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+.fc-section__header {
+  background: linear-gradient(180deg, #0b1f3a 0%, #07162e 100%);
+  border-bottom: 4px solid #d9b54c;
+  padding-block: clamp(2rem, 5vw, 3rem);
+}
+
+.fc-section__header-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.fc-section__eyebrow {
+  font-size: clamp(0.78rem, 0.74rem + 0.22vw, 0.92rem);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #f5d98c;
+}
+
+.fc-section__title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 1.3rem + 2.4vw, 2.6rem);
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fc-section__subtitle {
+  color: #f7f3ea;
+  font-size: clamp(0.9rem, 0.86rem + 0.3vw, 1.05rem);
+}
+
+.fc-section__divider {
+  width: min(260px, 50vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #d9b54c 50%, transparent 100%);
+  margin-top: 0.6rem;
+}
+
+.fc-section__content {
+  padding-block: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+/* Carousel */
+.fc-carousel {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(11, 31, 58, 0.9);
+  border: 2px solid rgba(217, 181, 76, 0.6);
+  background-color: #0b1f3a;
+}
+
+.fc-carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.fc-carousel__track {
+  display: flex;
+  transition: transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.fc-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.fc-carousel__slide img {
+  width: 100%;
+  height: clamp(260px, 46vw, 520px);
+  object-fit: cover;
+  display: block;
+}
+
+/* Nav buttons */
+.fc-carousel__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 217, 140, 0.6);
+  background-color: rgba(11, 31, 58, 0.6);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background-color 180ms ease, transform 180ms ease;
+  z-index: 2;
+}
+
+.fc-carousel__nav:hover {
+  background-color: rgba(217, 181, 76, 0.85);
+  color: #0b1f3a;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.fc-carousel__nav--prev {
+  left: 1rem;
+}
+
+.fc-carousel__nav--next {
+  right: 1rem;
+}
+
+/* Dots */
+.fc-carousel__dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.fc-carousel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 217, 140, 0.7);
+  background-color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 180ms ease, transform 180ms ease, width 180ms ease;
+}
+
+.fc-carousel__dot--active {
+  background-color: #d9b54c;
+  width: 26px;
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .fc-carousel__nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .fc-carousel__slide img {
+    height: clamp(220px, 56vw, 320px);
+  }
+}
+
+/* Biaya Pendidikan sub-section */
+.fc-biaya {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.fc-biaya__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fc-biaya__title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: clamp(1.4rem, 1.2rem + 1.6vw, 2rem);
+  color: #0b1f3a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fc-biaya__divider {
+  width: min(200px, 40vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #d9b54c 50%, transparent 100%);
+}
+
+.fc-biaya__grid {
+  display: grid;
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .fc-biaya__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .fc-biaya__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.fc-biaya__card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: clamp(1rem, 1.5vw, 1.4rem);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8f5 100%);
+  border: 1px solid rgba(217, 181, 76, 0.5);
+  box-shadow: 0 20px 40px -30px rgba(11, 31, 58, 0.8);
+}
+
+.fc-biaya__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5d98c 0%, #d9b54c 100%);
+  color: #0b1f3a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1px solid #b89b3a;
+  flex-shrink: 0;
+}
+
+.fc-biaya__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fc-biaya__label {
+  color: #0b1f3a;
+  font-weight: 600;
+  font-size: clamp(0.85rem, 0.82rem + 0.2vw, 0.95rem);
+  letter-spacing: 0.06em;
+}
+
+.fc-biaya__price {
+  color: #b89b3a;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.85rem);
+}
+
+/* Alur Pendaftaran sub-section */
+.fc-alur {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.fc-alur__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fc-alur__title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: clamp(1.4rem, 1.2rem + 1.6vw, 2rem);
+  color: #0b1f3a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fc-alur__divider {
+  width: min(200px, 40vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #d9b54c 50%, transparent 100%);
+}
+
+.fc-alur__steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 1vw, 0.8rem);
+  padding: clamp(1rem, 2vw, 1.4rem);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8f5 100%);
+  border: 1px solid rgba(217, 181, 76, 0.5);
+  box-shadow: 0 20px 40px -30px rgba(11, 31, 58, 0.8);
+}
+
+.fc-alur__step-wrapper {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.4rem, 1vw, 0.8rem);
+}
+
+.fc-alur__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.fc-alur__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5d98c 0%, #d9b54c 100%);
+  color: #0b1f3a;
+  border: 1px solid #b89b3a;
+  flex-shrink: 0;
+}
+
+.fc-alur__label {
+  color: #0b1f3a;
+  font-weight: 600;
+  font-size: clamp(0.8rem, 0.78rem + 0.15vw, 0.9rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.fc-alur__arrow {
+  color: #d9b54c;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0.2rem;
+}
