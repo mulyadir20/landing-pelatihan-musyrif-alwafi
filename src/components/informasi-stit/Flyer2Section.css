@@ -1,6 +1,7 @@
 .f2-section {
   background: linear-gradient(180deg, #f8f5ee 0%, #ffffff 100%);
   padding-block: clamp(2rem, 5vw, 3rem);
+  overflow-x: hidden;
 }
 
 .f2-section__hero {
@@ -32,10 +33,11 @@
 
 .f2-section__title {
   font-family: 'Poppins', 'Inter', sans-serif;
-  font-size: clamp(1.8rem, 1.4rem + 2.6vw, 3rem);
+  font-size: clamp(1.4rem, 1.1rem + 2vw, 3rem);
   color: #ffffff;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
 .f2-section__subtitle {

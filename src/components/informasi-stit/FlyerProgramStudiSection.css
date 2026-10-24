@@ -1,6 +1,7 @@
 .fps-section {
   background: radial-gradient(circle at top, rgba(217, 181, 76, 0.12), transparent 60%), #f5f0e6;
   padding-block: clamp(2rem, 5vw, 3.5rem);
+  overflow-x: hidden;
 }
 
 .fps-section__header {

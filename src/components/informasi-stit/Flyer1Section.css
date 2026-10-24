@@ -1,6 +1,7 @@
 .f1-section {
   background: radial-gradient(circle at top, rgba(217, 181, 76, 0.14), transparent 60%), #f8f5ee;
   min-height: calc(100vh - 78px);
+  overflow-x: hidden;
 }
 
 .f1-section__header {
@@ -26,10 +27,11 @@
 
 .f1-section__title {
   font-family: 'Poppins', 'Inter', sans-serif;
-  font-size: clamp(2.2rem, 1.6rem + 4vw, 4.2rem);
+  font-size: clamp(1.6rem, 1.2rem + 3vw, 4.2rem);
   color: #ffffff;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
 .f1-section__year {
